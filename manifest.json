@@ -2,7 +2,7 @@
   "name": "Para Mi Esmeralda",
   "short_name": "Esmeralda Love",
   "description": "Una presentación de amor para mi prometida.",
-  "start_url": "/[TU-NOMBRE-DEL-REPOSITORIO]/index.html", 
+  "start_url": "/App-esmeralda/index.html", 
   "display": "standalone",
   "background_color": "#1a1a1a",
   "theme_color": "#3F51B5",
@@ -19,5 +19,3 @@
     }
   ]
 }
-
-
