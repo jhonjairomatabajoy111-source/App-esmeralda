@@ -6,14 +6,21 @@
     <title>Para Mi Esmeralda - J $\pi$ E</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     
-    <audio controls autoplay loop id="myAudio">
+    <audio controls loop id="myAudio">
         <source src="mi_cancion_de_amor.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
 
+    <div id="overlay">
+        <div class="overlay-content">
+            <h2 class="initials-large" style="color: white; margin-bottom: 20px;">J &pi; E</h2>
+            <p>Toca la pantalla para comenzar la música y el viaje.</p>
+        </div>
+    </div>
     <header class="hero">
         <h1 class="initials">J &pi; E</h1> 
         <h1>Para Mi Esmeralda</h1>
@@ -74,5 +81,21 @@
 
     </main>
 
-</body>
+    <script>
+        document.getElementById('overlay').addEventListener('click', function() {
+            var audio = document.getElementById('myAudio');
+            audio.play().catch(error => {
+                console.log('Fallo la reproducción automática:', error);
+            });
+            this.style.opacity = '0';
+            setTimeout(() => {
+                this.style.display = 'none';
+                audio.controls = true; // Hace visibles los controles después de iniciar
+            }, 500);
+        });
+        
+        // Esconde los controles inicialmente para que solo se vea el overlay
+        document.getElementById('myAudio').controls = false;
+    </script>
+    </body>
 </html>
