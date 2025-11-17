@@ -7,20 +7,28 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- CONEXIÓN PWA: Le dice al navegador dónde buscar el ícono y el nombre de la app -->
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     
+    <!-- 🎵 Reproductor de Música Oculto 🎵 -->
     <audio controls loop id="myAudio">
+        <!-- ⚠️ IMPORTANTE: Reemplaza "mi_cancion_de_amor.mp3" por el nombre de tu archivo de música. -->
         <source src="mi_cancion_de_amor.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
 
+    <!-- CAPA DE INICIO (OVERLAY) -->
     <div id="overlay">
         <div class="overlay-content">
             <h2 class="initials-large" style="color: white; margin-bottom: 20px;">J &pi; E</h2>
             <p>Toca la pantalla para comenzar la música y el viaje.</p>
         </div>
     </div>
+    <!-- FIN CAPA DE INICIO -->
+
     <header class="hero">
         <h1 class="initials">J &pi; E</h1> 
         <h1>Para Mi Esmeralda</h1>
@@ -36,6 +44,7 @@
             </div>
         </section>
 
+        <!-- Primer Slide con Foto y Mensaje -->
         <section class="slide photo-slide" id="slide1">
             <div class="photo-placeholder">
                 <img src="foto1.jpg" alt="Nuestra foto favorita">
@@ -51,6 +60,7 @@
             </div>
         </section>
 
+        <!-- Segundo Slide con Foto y Mensaje -->
         <section class="slide photo-slide reverse" id="slide2">
             <div class="content">
                 <h3>Mi Mayor Sueño Hecho Realidad</h3>
@@ -62,6 +72,7 @@
             </div>
         </section>
 
+        <!-- Tercer Slide con Poema Corto -->
         <section class="slide message-only dark" id="slide3">
             <div class="content">
                 <h2>❤️ Eres mi Amor Eterno ❤️</h2>
@@ -81,7 +92,9 @@
 
     </main>
 
+    <!-- CÓDIGO JAVASCRIPT para el inicio de música y registro PWA -->
     <script>
+        // Lógica de inicio de música al hacer clic en la superposición
         document.getElementById('overlay').addEventListener('click', function() {
             var audio = document.getElementById('myAudio');
             audio.play().catch(error => {
@@ -90,12 +103,37 @@
             this.style.opacity = '0';
             setTimeout(() => {
                 this.style.display = 'none';
-                audio.controls = true; // Hace visibles los controles después de iniciar
+                audio.controls = true; 
             }, 500);
         });
         
-        // Esconde los controles inicialmente para que solo se vea el overlay
+        // Esconde los controles inicialmente
         document.getElementById('myAudio').controls = false;
+
+
+        // REGISTRO PWA: Service Worker (ESTO CONVIERTE la web en app)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(reg => console.log('Service Worker registrado con éxito:', reg.scope))
+                    .catch(err => console.error('Fallo el registro del Service Worker:', err));
+            });
+        }
     </script>
-    </body>
+    <!-- FIN CÓDIGO JAVASCRIPT -->
+
+</body>
 </html>
+
+
+### Resumen de la Acción a Seguir:
+
+1. **Guarda** el código de arriba en tu archivo `index.html`.
+2. **Asegúrate** de tener en la misma carpeta:
+    * `styles.css` (el último que te envié).
+    * `manifest.json` (el que creaste en el paso anterior).
+    * `service-worker.js` (el que creaste en el paso anterior).
+    * `icon-192.png` y `icon-512.png` (los íconos de la app).
+3. **Sube todos estos archivos** a tu repositorio de GitHub.
+
+¡Una vez que GitHub actualice la página (suele tardar un par de minutos), el enlace que ya tienes estará listo para ser instalado en el celular como una aplicación!
